@@ -168,7 +168,10 @@ export class Multisig implements Contract {
             // pack transfers to the order_body cell
             for (let i = 0; i < actions.length; i++) {
                 const action = actions[i];
-                const actionCell = action.type === "transfer" ? Multisig.packTransferRequest(action) : Multisig.packUpdateRequest(action);
+                const actionCell = action.type === "transfer"
+                    ? Multisig.packTransferRequest(action)
+                    : Multisig.packUpdateRequest(action);
+
                 order_dict.set(i, actionCell);
             }
             return beginCell().storeDictDirect(order_dict).endCell();
@@ -199,10 +202,17 @@ export class Multisig implements Contract {
         let order_cell = Multisig.packOrder(actions);
         return msgBody.storeRef(order_cell).endCell();
     }
-    async sendNewOrder(provider: ContractProvider, via: Sender,
-           actions: Order | Cell,
-           expirationDate: number, value: bigint = toNano('1'), addrIdx?: number, isSigner?: boolean, seqno?: bigint) {
 
+    async sendNewOrder(
+        provider: ContractProvider,
+        via: Sender,
+        actions: Order | Cell,
+        expirationDate: number,
+        value: bigint = toNano('1'),
+        addrIdx?: number,
+        isSigner?: boolean,
+        seqno?: bigint
+    ) {
         if(seqno == undefined) {
             seqno = 115792089237316195423570985008687907853269984665640564039457584007913129639935n;
         }

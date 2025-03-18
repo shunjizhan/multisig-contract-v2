@@ -81,7 +81,7 @@ describe('Multisig', () => {
                                                          0, // Address index
                                                         );
         // Make sure proposers a checked against list too
-        const msgProp  = Multisig.newOrderMessage([testMsg],  blockchain.now + 1000,
+        const msgProposer  = Multisig.newOrderMessage([testMsg],  blockchain.now + 1000,
                                                          false, // is signer
                                                          0, // Address index
                                                         );
@@ -100,7 +100,7 @@ describe('Multisig', () => {
                 deploy: true
             });
         }
-        let nobodyMsgs = [msgSigner, msgProp];
+        let nobodyMsgs = [msgSigner, msgProposer];
         for (let nbMessage of nobodyMsgs) {
             let res = await blockchain.sendMessage(internal({
                 from: nobody.address,
@@ -116,7 +116,7 @@ describe('Multisig', () => {
         let res = await blockchain.sendMessage(internal({
             from: proposer.address,
             to: multisig.address,
-            body: msgProp,
+            body: msgProposer,
             value: toNano('1')
         }));
 
@@ -152,7 +152,7 @@ describe('Multisig', () => {
         res = await blockchain.sendMessage(internal({
             from: deployer.address,
             to: multisig.address,
-            body: msgProp,
+            body: msgProposer,
             value: toNano('1')
         }));
         assertUnauthorizedOrder(res.transactions, deployer.address);

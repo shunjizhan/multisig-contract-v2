@@ -34,7 +34,7 @@ export class Order implements Contract {
     constructor(readonly address: Address,
                 readonly init?: { code: Cell, data: Cell },
                 readonly configuration?: OrderConfig) {}
-    
+
     static createFromAddress(address: Address) {
         return new Order(address);
     }

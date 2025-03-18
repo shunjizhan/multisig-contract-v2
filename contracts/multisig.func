@@ -130,12 +130,12 @@ int validate_dictionary_sequence(cell dict) impure inline {
         cell state_init = calculate_order_state_init(my_address(), order_seqno);
         slice order_address = calculate_address_by_state_init(BASECHAIN, state_init);
         builder init_body = begin_cell()
-        .store_op_and_query_id(op::init, query_id)
-        .store_index(threshold)
-        .store_nonempty_dict(signers)
-        .store_timestamp(expiration_date)
-        .store_ref(order_body)
-        .store_bool(signer?);
+            .store_op_and_query_id(op::init, query_id)
+            .store_index(threshold)
+            .store_nonempty_dict(signers)
+            .store_timestamp(expiration_date)
+            .store_ref(order_body)
+            .store_bool(signer?);
         if (signer?) {
             init_body = init_body.store_index(index);
         }

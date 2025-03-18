@@ -2,8 +2,11 @@
     "name": "Multiowner",
     "version": "0.0.1",
     "scripts": {
-        "start": "blueprint run",
+        "deploy": "blueprint run deployWallet --testnet",
+        "approve": "blueprint run approve --testnet",
+        "order": "blueprint run newOrder --testnet",
         "build": "blueprint build",
+        "verify": "blueprint verify",
         "test": "jest"
     },
     "devDependencies": {
